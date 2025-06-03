@@ -22,16 +22,23 @@ export const Home = () => {
             getData();
         }
     }
+
+    const editContact = (contact) => {
+        dispatch({type:'edit', payload: contact});
+        navigate('/editContact')
+    }
+
     return (
         <div className="text-center mt-5">
             <div>
                 {store.contacts.map( (contact, index) => (
-                <ContactCard key={index} contact={contact} deleteContact={deleteContact} />
+                <ContactCard key={index} contact={contact} deleteContact={deleteContact} editContact={editContact} />
                 ))}
             </div>
         </div>
     );
 };
+
 
 
 

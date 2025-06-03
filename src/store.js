@@ -1,6 +1,7 @@
 export const initialStore=()=>{//Modificar el objeto con la estructura que viene del fetch
   return{
-    contacts: []
+    contacts: [],
+    contact: []
   }
 }
 export default function storeReducer(store, action = {}) {
@@ -12,6 +13,12 @@ export default function storeReducer(store, action = {}) {
         // todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
         contacts: contacts
       };
+    case 'edit':
+        const contact = action.payload;
+        return {
+          ...store,
+          contact: contact
+        }
     default:
       throw Error('Unknown action.');
   }

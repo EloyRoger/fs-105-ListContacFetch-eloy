@@ -2,17 +2,25 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { UserComplete } from "../components/UserComplete.jsx";
 import useGlobalReducer from "../hooks/useGlobalReducer";  // Custom hook for accessing the global state.
+import { addContact,putContact } from "../service/contact.js";
 
-export const AddContact = () => {
-  // Access the global state and dispatch function using the useGlobalReducer hook.
-  // const { store, dispatch } = useGlobalReducer()
-  const [contact, setContact] = useState({
+const initial_state = {
     name: '',
     email: '',
     phone: '',
     address: ''
-  });
+}
+export const AddContact = ({type}) => {
+  const {store} = useGlobalReducer();
+  const isEdit = type === 'edit';
+  const [contact, setContact] = useState(initial_state);
   const [message, setMessage] = useState();
+  useEffect(() => {
+    console.log(store)
+    const contactState = isEdit ? store.contact : initial_state;
+    setContact(contactState);
+  },[]);
+
   const onChange = (event) => {
     const name = event.target.name
     const value = event.target.value
@@ -21,23 +29,22 @@ export const AddContact = () => {
   const onSubmit = async (event)=> {
     event.preventDefault();
     console.log(contact);
-    await createContact();
+    if (isEdit) {
+        await editContact();
+    } else {
+        await createContact();
+  }
   }
   const createContact = async () => {
-    try {
-      const response = await fetch('https://playground.4geeks.com/contact/agendas/Eloy/contacts', {
-        method: 'POST',
-        headers:{
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(contact),
-      });
-      console.log(response);
-      if(response.status === 201){
-        setMessage('Contact create')
-      }
-    } catch (err) {
-      console.log('error in create contact', err)
+    const addContactResponse = await addContact(contact);
+    if(addContactResponse) {
+      setMessage(addContactResponse);
+    }
+  }
+    const editContact = async () => {
+      const editContactResponse = await putContact(contact);
+      if(editContactResponse) {
+      setMessage(editContactResponse);
     }
   }
   return (

@@ -1,6 +1,4 @@
-import { deleteContactById } from "../service/contact";
-
-export const ContactCard = ({contact, deleteContact}) => {
+export const ContactCard = ({contact, deleteContact, editContact}) => {
     const {name, phone, email, address, id} = contact;
     return (
         <div className="card" >
@@ -15,7 +13,7 @@ export const ContactCard = ({contact, deleteContact}) => {
                         <p className="card-text">{email}</p>
                         <p className="card-text"><small className="text-body-secondary">{address}</small></p>
                     </div>
-                    <button className="btn btn-primary" onClick={() => contact (id)} >Edit</button>
+                    <button className="btn btn-primary" onClick={() => editContact (contact)} >Edit</button>
                     <button className="btn btn-danger" onClick={() => deleteContact (id)}>
                             DELETE
                     </button>
