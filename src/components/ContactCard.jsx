@@ -1,3 +1,5 @@
+import { deleteContactById } from "../service/contact";
+
 export const ContactCard = ({contact, deleteContact}) => {
     const {name, phone, email, address, id} = contact;
     return (
@@ -13,71 +15,35 @@ export const ContactCard = ({contact, deleteContact}) => {
                         <p className="card-text">{email}</p>
                         <p className="card-text"><small className="text-body-secondary">{address}</small></p>
                     </div>
-                    <button>Edit</button>
-                    <button onClick={() => deleteContact(id)}>Delete</button>
+                    <button className="btn btn-primary" onClick={() => contact (id)} >Edit</button>
+                    <button className="btn btn-danger" onClick={() => deleteContact (id)}>
+                            DELETE
+                    </button>
                 </div>
             </div>
         </div>
 )}
 
-// import { Link } from "react-router-dom";
-// import { useState } from "react";
-
-
-// const ContactCard = ({ contact, onDelete }) => {
-//   const [showModal, setShowModal] = useState(false);
-
+// export const ContactCard = ({ contact, deleteContact }) => {
 //   return (
 //     <div className="card mb-3">
 //       <div className="card-body">
 //         <h5 className="card-title">{contact.full_name}</h5>
 //         <p className="card-text">Email: {contact.email}</p>
-//         <p className="card-text">Phone: {contact.phone}</p>
-//         <div className="d-flex gap-2">
-//           <Link to={`/edit/${contact.id}`} className="btn btn-warning">
-//             Edit
-//           </Link>
-//           <button 
-//             onClick={() => setShowModal(true)} 
-//             className="btn btn-danger"
-//           >
-//             Delete
-//           </button>
-//         </div>
+//         <p className="card-text">Teléfono: {contact.phone}</p>
+//         <p className="card-text">Dirección: {contact.address}</p>
+        
+//         {/* Botón de eliminar */}
+//         <button 
+//           className="btn btn-danger"
+//           onClick={() => {
+//             if (window.confirm('¿Seguro que quieres eliminar este contacto?')) {
+//               deleteContact(contact.id);
+//             }
+//           }}>
+//           DELETE
+//         </button>
 //       </div>
-
-//       {showModal && (
-//         <div className="modal" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-//           <div className="modal-dialog">
-//             <div className="modal-content">
-//               <div className="modal-header">
-//                 <h5 className="modal-title">Confirm Delete</h5>
-//               </div>
-//               <div className="modal-body">
-//                 Are you sure you want to delete this contact?
-//               </div>
-//               <div className="modal-footer">
-//                 <button 
-//                   className="btn btn-secondary" 
-//                   onClick={() => setShowModal(false)}
-//                 >
-//                   Cancel
-//                 </button>
-//                 <button 
-//                   className="btn btn-danger"
-//                   onClick={() => {
-//                     onDelete(contact.id);
-//                     setShowModal(false);
-//                   }}
-//                 >
-//                   Delete
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       )}
 //     </div>
 //   );
 // };
-// export default ContactCard;

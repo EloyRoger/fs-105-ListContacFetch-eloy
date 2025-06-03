@@ -17,7 +17,10 @@ export const Home = () => {
         getData();
     },[]);
     const deleteContact = async (id) => {
-       await deleteContactById(id);
+       const isdelete = await deleteContactById(id);
+        if (isdelete) {
+            getData();
+        }
     }
     return (
         <div className="text-center mt-5">
@@ -29,8 +32,6 @@ export const Home = () => {
         </div>
     );
 };
-
-
 
 
 

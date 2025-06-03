@@ -17,7 +17,9 @@ export const deleteContactById = async (id) =>{
             method: 'DELETE'
         });
         console.log(response);
-        // PROBAR API!!
+    if (response.status = 204){
+        return true;
+    }
        
     } catch (err) {
         console.log('ERROR DELETE CONTACT', err);
