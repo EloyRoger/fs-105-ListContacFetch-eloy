@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserComplete } from "../components/UserComplete.jsx";
 import useGlobalReducer from "../hooks/useGlobalReducer";  // Custom hook for accessing the global state.
-import { addContact,putContact } from "../service/contact.js";
+import { addContact,putContact } from "../service/contact";
 
 const initial_state = {
     name: '',

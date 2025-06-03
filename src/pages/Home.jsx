@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { ContactCard } from "../components/ContactCard.jsx";
 import { getContact, deleteContactById } from "../service/contact.js";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
     //   const[dataLoaded, setDataLoaded] = useState({})
     const {store, dispatch} =useGlobalReducer();
+    const navigate =useNavigate();
     const getData = async () => {
         const data = await  getContact ();
         if (data) {
